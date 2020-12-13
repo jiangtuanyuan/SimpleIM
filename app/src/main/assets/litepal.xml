@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!-- 数据库名字 -->
+    <dbname value="simpleIM" />
+    <!-- 数据库版本 -->
+    <version value="1" />
+    <!-- 数据库表 class路径一定要写全 -->
+    <list>
+        <!-- PHP版本的消息相关数据库  -->
+        <mapping
+            class="org.pmm.simpleim.db.IMDbDataBean" /><!--列表-->
+    </list>
+</litepal>

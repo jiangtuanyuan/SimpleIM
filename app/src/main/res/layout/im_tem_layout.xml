@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/top_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:text="12:31"
+        android:textColor="@color/gray_font"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:id="@+id/li_Left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left|center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_Left_headimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:visibility="visible" />
+
+        <com.github.library.bubbleview.BubbleTextView
+            android:id="@+id/tv_Left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="120dp"
+            android:padding="8dp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            app:angle="8dp"
+            app:arrowCenter="true"
+            app:arrowHeight="10dp"
+            app:arrowLocation="left"
+            app:arrowPosition="14dp"
+            app:arrowWidth="8dp"
+            app:bubbleColor="@color/white" />
+
+
+        <ImageView
+            android:id="@+id/iv_Left_image"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone" />
+
+
+        <com.github.library.bubbleview.BubbleLinearLayout
+            android:id="@+id/vioce_Left_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:angle="8dp"
+            app:arrowCenter="true"
+            app:arrowHeight="10dp"
+            app:arrowLocation="left"
+            app:arrowPosition="10dp"
+            app:arrowWidth="8dp"
+            app:bubbleColor="@color/font_color_2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/ic_chat_message_ietm_voice_lefe" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="3dp"
+                android:text="         " />
+
+        </com.github.library.bubbleview.BubbleLinearLayout>
+
+        <TextView
+            android:id="@+id/vioce_Left_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:text="''"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/li_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="right|center_vertical"
+        android:visibility="visible">
+
+
+        <ImageView
+            android:id="@+id/iv_Right_image"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="5dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/vioce_Right_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:text="''"
+            android:visibility="gone" />
+
+        <com.github.library.bubbleview.BubbleLinearLayout
+            android:id="@+id/vioce_Right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:angle="8dp"
+            app:arrowCenter="true"
+            app:arrowHeight="10dp"
+            app:arrowLocation="right"
+            app:arrowPosition="10dp"
+            app:arrowWidth="8dp"
+            app:bubbleColor="@color/font_color_2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="3dp"
+                android:text="         " />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/ic_chat_message_item_voice_rigth" />
+
+        </com.github.library.bubbleview.BubbleLinearLayout>
+
+        <com.github.library.bubbleview.BubbleTextView
+            android:id="@+id/tv_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="5dp"
+            android:padding="8dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            app:angle="8dp"
+            app:arrowCenter="true"
+            app:arrowHeight="10dp"
+            app:arrowLocation="right"
+            app:arrowPosition="14dp"
+            app:arrowWidth="8dp"
+            app:bubbleColor="@color/font_color_2" />
+
+        <ImageView
+            android:id="@+id/iv_Right_headimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="5dp"
+            android:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>
