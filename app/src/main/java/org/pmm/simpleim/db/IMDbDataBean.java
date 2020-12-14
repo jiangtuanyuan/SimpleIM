@@ -52,4 +52,15 @@ public class IMDbDataBean extends LitePalSupport {
     public void setAddtime(String addtime) {
         this.addtime = addtime;
     }
+
+    @Override
+    public String toString() {
+        return "IMDbDataBean{" +
+                "id=" + id +
+                ", msgid=" + msgid +
+                ", cardname='" + cardname + '\'' +
+                ", message='" + message + '\'' +
+                ", addtime='" + addtime + '\'' +
+                '}';
+    }
 }

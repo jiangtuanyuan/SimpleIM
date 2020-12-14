@@ -140,9 +140,18 @@ public class MainActivity extends AppCompatActivity implements IMDetailsAdapter.
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void acceptMsg(IMDbDataBean dataBean) {
         try {
-            mList.add(dataBean);
-            chatMessageDetailsAdapter.notifyDataSetChanged();
-            recyclerview.scrollToPosition(chatMessageDetailsAdapter.getItemCount() - 1);
+            boolean tf = false;
+            for (IMDbDataBean bean : mList) {
+                if (bean.getMsgid() == dataBean.getMsgid()) {
+                    tf = true;
+                    break;
+                }
+            }
+            if (!tf) {
+                mList.add(dataBean);
+                chatMessageDetailsAdapter.notifyDataSetChanged();
+                recyclerview.scrollToPosition(chatMessageDetailsAdapter.getItemCount() - 1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

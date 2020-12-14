@@ -59,7 +59,8 @@ public class IMDetailsAdapter extends RecyclerView.Adapter<IMDetailsAdapter.View
 
         String time = null;
         try {
-            time = chatdetails.getAddtime().substring(chatdetails.getAddtime().length() - 5);
+            time = chatdetails.getAddtime().substring(chatdetails.getAddtime().length() - 8);
+            time = time.substring(0, 5);
             String day = chatdetails.getAddtime().substring(0, 10);
 
             //设置消息时间
@@ -82,8 +83,11 @@ public class IMDetailsAdapter extends RecyclerView.Adapter<IMDetailsAdapter.View
             } else if (DateUtils.isLatestWeek(day)) {
                 //获取当前日期是周几
                 holder.topTime.setText(DateUtils.DateToDay(day) + " " + time);// 周四 10:19
-            } else holder.topTime.setText(chatdetails.getAddtime());//2018-05-17 16:39
+            } else {
+                holder.topTime.setText(chatdetails.getAddtime());//2018-05-17 16:39
+            }
 
+            holder.tvLeftName.setText(chatdetails.getCardname());
         } catch (Exception e) {
             e.printStackTrace();
             holder.topTime.setText(time + "");
@@ -287,6 +291,7 @@ public class IMDetailsAdapter extends RecyclerView.Adapter<IMDetailsAdapter.View
     //绑定控件
     protected class ViewHolder extends RecyclerView.ViewHolder {
         public TextView topTime;//时间
+        public TextView tvLeftName;
 
         public ImageView ivLeftHeadimage;//左边头像
         public BubbleTextView tvLeftText;//左边文本
@@ -306,6 +311,8 @@ public class IMDetailsAdapter extends RecyclerView.Adapter<IMDetailsAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
             topTime = itemView.findViewById(R.id.top_time);
+
+            tvLeftName = itemView.findViewById(R.id.tv_name);
 
             ivLeftHeadimage = itemView.findViewById(R.id.iv_Left_headimage);
             tvLeftText = itemView.findViewById(R.id.tv_Left_text);

@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -35,7 +36,9 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.litepal.LitePal;
 import org.pmm.simpleim.BuildConfig;
 import org.pmm.simpleim.R;
 import org.pmm.simpleim.db.IMDbDataBean;
@@ -45,6 +48,7 @@ import org.pmm.simpleim.utils.NotificationUtils;
 import org.pmm.simpleim.utils.RxTimerUtil;
 import org.pmm.simpleim.utils.SPUtils;
 
+import java.util.List;
 import java.util.Random;
 
 
@@ -83,7 +87,7 @@ public class IMService extends Service {
     private void startTimer() {
         startISok = true;
         //10s
-        RxTimerUtil.interval(10000, new RxTimerUtil.IRxNext() {
+        RxTimerUtil.interval(7000, new RxTimerUtil.IRxNext() {
             @SuppressLint("NewApi")
             @Override
             public void doNext(long number) {
@@ -119,17 +123,15 @@ public class IMService extends Service {
                             String str = response.body();
                             LogUtils.d(str);
                             if (!TextUtils.isEmpty(str)) {
-                                JSONObject jsonObject = new JSONObject(str);
-                                int code = jsonObject.optInt("code");
+                                JSONObject JSON = new JSONObject(str);
+                                int code = JSON.optInt("code");
                                 if (code == 1) {
+                                    JSONArray jsonArray = JSON.optJSONArray("data");
                                     Gson gson = new Gson();
-                                    IMDbDataBean dataBean = gson.fromJson(str, IMDbDataBean.class);
-                                    if (dataBean != null) {
-                                        dataBean.save();//保存进数据库
-                                        String messagesA = SPUtils.getInstance().getString(SPUtils.CHAT_MESSAGE_A, "false");
-                                        EventBus.getDefault().postSticky(dataBean);
-                                        if (messagesA.equals("false")) {
-                                            showNotification(dataBean);
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        IMDbDataBean dataBean = gson.fromJson(jsonArray.optString(i), IMDbDataBean.class);
+                                        if (dataBean != null) {
+                                            savaAndUpdateData(dataBean);
                                         }
                                     }
                                 }
@@ -147,6 +149,30 @@ public class IMService extends Service {
     }
 
     /**
+     * sava to data
+     *
+     * @param dataBean
+     */
+    private void savaAndUpdateData(IMDbDataBean dataBean) {
+        List<IMDbDataBean> dataDBs = LitePal.where("msgid = ?", String.valueOf(dataBean.getMsgid())).find(IMDbDataBean.class);
+        LogUtils.d(dataDBs);
+        if (dataDBs.size() == 0) {
+            dataBean.save();
+        } else if (dataDBs.size() == 1) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("cardname", dataBean.getCardname());
+            contentValues.put("message", dataBean.getMessage());
+            contentValues.put("addtime", dataBean.getAddtime());
+            LitePal.update(IMDbDataBean.class, contentValues, dataDBs.get(0).getId());
+        }
+        String messagesA = SPUtils.getInstance().getString(SPUtils.CHAT_MESSAGE_A, "false");
+        EventBus.getDefault().post(dataBean);
+        if (messagesA.equals("false")) {
+            showNotification(dataBean);
+        }
+    }
+
+    /**
      * 显示一条聊天信息的通知
      *
      * @param bean
@@ -160,6 +186,7 @@ public class IMService extends Service {
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationUtils.showNotification(MyApp.getContext(), contentIntent,
                 bean.getCardname(), bean.getMessage(), NOTIFI_CHAT, new Random().nextInt(8000 + 1));
+
     }
 
     /**
