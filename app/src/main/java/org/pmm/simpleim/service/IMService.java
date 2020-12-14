@@ -110,7 +110,6 @@ public class IMService extends Service {
      */
     private String userID = SPUtils.getInstance().getString(SPUtils.USER_UID);
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void getSginText() {
         String url = "http://p2pmm.cn/api/index/get_data";
         OkGo.<String>post(url)

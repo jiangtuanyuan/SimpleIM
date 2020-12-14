@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     signingConfigs {
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "org.pmm.simpleim"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 1
         versionName "app:v1.0"
 

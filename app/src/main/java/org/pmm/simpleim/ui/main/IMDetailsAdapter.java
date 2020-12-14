@@ -57,7 +57,7 @@ public class IMDetailsAdapter extends RecyclerView.Adapter<IMDetailsAdapter.View
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final IMDbDataBean chatdetails = list.get(position);
 
-        String time = null;
+        String time = "00:00";
         try {
             time = chatdetails.getAddtime().substring(chatdetails.getAddtime().length() - 8);
             time = time.substring(0, 5);
@@ -90,7 +90,7 @@ public class IMDetailsAdapter extends RecyclerView.Adapter<IMDetailsAdapter.View
             holder.tvLeftName.setText(chatdetails.getCardname());
         } catch (Exception e) {
             e.printStackTrace();
-            holder.topTime.setText(time + "");
+            holder.topTime.setText(time);
         }
 
 
