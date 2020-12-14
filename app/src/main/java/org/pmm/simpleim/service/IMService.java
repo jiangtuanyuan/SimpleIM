@@ -127,10 +127,9 @@ public class IMService extends Service {
                                     if (dataBean != null) {
                                         dataBean.save();//保存进数据库
                                         String messagesA = SPUtils.getInstance().getString(SPUtils.CHAT_MESSAGE_A, "false");
+                                        EventBus.getDefault().postSticky(dataBean);
                                         if (messagesA.equals("false")) {
                                             showNotification(dataBean);
-                                        } else {
-                                            EventBus.getDefault().postSticky(dataBean);
                                         }
                                     }
                                 }
