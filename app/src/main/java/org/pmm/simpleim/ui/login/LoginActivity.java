@@ -173,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (code == 1) {
                         SPUtils.getInstance().putString(SPUtils.USER_NAME, name);
                         SPUtils.getInstance().putString(SPUtils.USER_UID, jsonObject.optString("userid"));
+                        SPUtils.getInstance().putString(SPUtils.USER_PWD, pwd);
                         startMain();
                         ToastUtils.showShort("登录成功!");
                     }
